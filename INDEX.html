@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaShield Recovery | Premium Property Protection Solutions</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #080a0c;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --primary-green: #10b981;
+            --accent-red: #ef4444;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Glassmorphic Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 40px;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .brand-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary-green), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-logo::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 12px var(--accent-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .nav-link {
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-link.active {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Container Sections */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding: 140px 20px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typography Styles */
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--primary-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .lead-text {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        /* Hero Image Container */
+        .featured-media {
+            width: 100%;
+            height: 480px;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 60px;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .featured-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.1);
+            transition: transform 8s ease;
+        }
+
+        .featured-media:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Grid Layouts */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-red));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        .contact-form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-green), #059669);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Blog Specific Styles */
+        .blog-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .blog-body p {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+
+        .blog-body .section-heading {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 48px 0 20px;
+            letter-spacing: -0.5px;
+            border-left: 4px solid var(--accent-red);
+            padding-left: 16px;
+        }
+
+        .blog-body .sub-heading {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin: 32px 0 16px;
+        }
+
+        .seo-anchor {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.4);
+            transition: var(--transition);
+        }
+
+        .seo-anchor:hover {
+            color: #ffffff;
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.1);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .faq-item .faq-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-glass);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.4rem; }
+            nav { width: 95%; padding: 10px 16px; }
+            .nav-links { gap: 4px; }
+            .nav-link { padding: 6px 12px; font-size: 0.8rem; }
+            .featured-media { height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Motion Navigation Header -->
+    <nav>
+        <div class="brand-logo">AquaShield</div>
+        <ul class="nav-links">
+            <li><a class="nav-link active" onclick="switchTab('home')">Home</a></li>
+            <li><a class="nav-link" onclick="switchTab('services')">Services</a></li>
+            <li><a class="nav-link" onclick="switchTab('about')">About</a></li>
+            <li><a class="nav-link" onclick="switchTab('blog')">Insights</a></li>
+            <li><a class="nav-link" onclick="switchTab('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page 1: Home Page -->
+    <section id="home" class="page-section active">
+        <span class="section-subtitle">Precision Structural Recovery</span>
+        <h1 class="hero-title">Advanced Environmental Mitigation & Water Control.</h1>
+        <p class="lead-text">Deploying state-of-the-art thermal diagnostics and moisture extraction technology to protect architectural integrity and residential structures.</p>
+        
+        <div class="featured-media">
+            <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=1600&q=80" alt="Environmental Control System">
+        </div>
+
+        <div class="cards-grid">
+            <div class="glass-card">
+                <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=600&q=80" class="card-image" alt="Structural Drying">
+                <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #fff;">Infrared Detection</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Precision thermal scanning to identify subsurface moisture accumulation without non-destructive interference.</p>
+            </div>
+            <div class="glass-card">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" class="card-image" alt="Emergency Containment">
+                <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #fff;">Rapid Extraction</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">High-volume fluid extraction equipment capable of handling complex structural fluid incidents efficiently.</p>
+            </div>
+            <div class="glass-card">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" class="card-image" alt="Humidity Control">
+                <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #fff;">Atmospheric Drying</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Industrial desiccant dehumidification protocols designed to stabilize interior microclimates instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 2: Service Page -->
+    <section id="services" class="page-section">
+        <span class="section-subtitle">Specialized Engineering Services</span>
+        <h1 class="hero-title">Comprehensive Remediation Capabilities.</h1>
+        <p class="lead-text">Engineered solutions designed for critical residential and commercial structural emergencies.</p>
+
+        <div class="cards-grid">
+            <div class="glass-card">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" class="card-image" alt="Fluid Diagnostics">
+                <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 10px;">Subsurface Moisture Mapping</h3>
+                <p style="color: var(--text-muted);">Utilizing high-frequency electromagnetic sensors to detect hidden saturations within drywall, masonry, and hardwood foundation layers.</p>
+            </div>
+            <div class="glass-card">
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" class="card-image" alt="Industrial Drying">
+                <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 10px;">Desiccant Air Scrubbing</h3>
+                <p style="color: var(--text-muted);">Deploying hospital-grade HEPA filtration and air scrubbing matrices to neutralize particulate contamination and moisture spores.</p>
+            </div>
+            <div class="glass-card">
+                <img src="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=600&q=80" class="card-image" alt="Structural Stabilization">
+                <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 10px;">Structural Deconstruction</h3>
+                <p style="color: var(--text-muted);">Controlled removal of compromised elements ensuring safety, structural stability, and seamless prep for complete restoration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 3: About Page -->
+    <section id="about" class="page-section">
+        <span class="section-subtitle">Our Operational Framework</span>
+        <h1 class="hero-title">Pioneering Architectural Recovery & Protection.</h1>
+        <p class="lead-text">Combining environmental science with precision technology to safeguard physical assets across complex environments.</p>
+
+        <div class="featured-media" style="height: 380px;">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80" alt="Modern Architecture">
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+            <div class="glass-card">
+                <h3 style="color: var(--primary-green); font-size: 1.5rem; margin-bottom: 10px;">Standard of Rigor</h3>
+                <p style="color: var(--text-muted);">Every project follows stringent environmental protocol criteria, utilizing calibrated scientific equipment to measure psychrometric levels precisely.</p>
+            </div>
+            <div class="glass-card">
+                <h3 style="color: var(--accent-red); font-size: 1.5rem; margin-bottom: 10px;">Rapid Response</h3>
+                <p style="color: var(--text-muted);">Deployment protocols are calibrated for instantaneous execution, minimizing progressive secondary structural degradation effectively.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 4: Blog Page (SEO Optimized 1200+ Words) -->
+    <section id="blog" class="page-section">
+        <div class="blog-container">
+            <span class="section-subtitle">Technical Insights & Analysis</span>
+            <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 16px;">Comprehensive Technical Protocol for Structural Fluid Mitigation and Disaster Recovery</h1>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">Published in Structural Recovery Journal • 8 Min Read</p>
+
+            <div class="featured-media" style="height: 400px;">
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Technical Moisture Evaluation">
+            </div>
+
+            <div class="blog-body">
+                <p>When unexpected structural compromises occur due to liquid breaches, weather anomalies, or mechanical failures, the immediate stability of coastal and sub-urban properties hangs in the balance. Understanding the fundamental science of psychrometrics and structural drying protocols is imperative for property caretakers. Unmanaged internal saturation does not merely harm superficial surfaces—it penetrates deep structural framing, subflooring matrices, and foundational concrete, precipitating progressive structural failure if unaddressed.</p>
+
+                <div class="section-heading">Understanding the Physics of Uncontrolled Indoor Saturation</div>
+                <p>Liquid intrusion inside modern architectural structures operates through capillary action and vapor pressure differentials. When building materials such as drywall, plywood subfloors, and concrete come into direct contact with excess moisture, they rapidly absorb the liquid. Materials expand, adhesive bonds degrade, and structural integrity weakens within hours.</p>
+                <p>Professional technicians categorize fluid incidents into specific classes based on the evaporation rate required to dry the space. Class 1 encompasses minimal absorption affecting only low-permeability materials. Class 4 involves deeply saturated materials like hardwood, plaster, and masonry that require specialized low-humidity conditions and continuous high-static pressure desiccant airflow for complete moisture removal.</p>
+
+                <div class="sub-heading">The Critical Timeline of Progressive Structural Damage</div>
+                <p>Time is the single most critical factor in structural mitigation. Within the initial minutes of intrusion, water spreads rapidly across porous surfaces, saturating textiles, paper backing, and porous finishes. Between 24 to 48 hours, secondary structural complications emerge. Microbial proliferation begins, organic dyes bleed, and composite woods swell irreversibly.</p>
+                <p>Executing an immediate response using professional <a href="https://quickwaterrestore.com/" class="seo-anchor">Water Damage Restoration in Long Island</a> halts progressive saturation, isolating the affected zone and establishing a controlled environmental microclimate necessary for rapid stabilization.</p>
+
+                <div class="section-heading">Advanced Psychrometric Protocols in Applied Drying</div>
+                <p>Drying a complex structure is an engineered science termed psychrometrics—the study of thermodynamic properties of moist air. Simply applying high-velocity air movers is insufficient without controlling relative humidity and ambient temperature.</p>
+                <p>Effective drying requires a calculated balance between three primary variables:</p>
+
+                <div class="glass-card" style="margin: 24px 0;">
+                    <ul style="color: var(--text-muted); padding-left: 20px; line-height: 2;">
+                        <li><strong style="color: #fff;">Air Movement:</strong> Displacing the boundary layer of saturated air directly above wet surfaces to accelerate evaporation.</li>
+                        <li><strong style="color: #fff;">Dehumidification:</strong> Extracting evaporated water vapor from the atmosphere to maintain a vapor pressure gradient.</li>
+                        <li><strong style="color: #fff;">Temperature Control:</strong> Optimizing ambient thermal energy to elevate vapor pressure within saturated structural materials.</li>
+                    </ul>
+                </div>
+
+                <p>By utilizing industrial LGR (Low Grain Refrigerant) dehumidifiers alongside desiccant systems, technicians can drive relative humidity levels below 20%, drawing bound moisture out from deep within structural timber and masonry structures without causing thermal shock or material cracking.</p>
+
+                <div class="sub-heading">Infrared Diagnostics and Non-Destructive Mapping</div>
+                <p>Visual inspection alone is fundamentally flawed when dealing with structural fluid intrusion. Liquid regularly migrates along structural beams, plumbing chases, and insulation layers, collecting in hidden voids far from the initial point of entry.</p>
+                <p>Modern mitigation methodologies utilize thermal imaging cameras combined with non-penetrating pinless moisture meters. Thermal imaging identifies temperature anomalies caused by evaporative cooling, pinpointing hidden moisture pockets behind walls and under floors with surgical precision, eliminating unnecessary wall demolition.</p>
+
+                <div class="featured-media" style="height: 320px; margin: 30px 0;">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Architectural Integrity Inspection">
+                </div>
+
+                <div class="section-heading">Restoration Workflows and Environmental Safety</div>
+                <p>Restoring a structural environment requires a systematic four-phase operational framework:</p>
+                <p>First, environmental containment is established using negative air pressure machines and plastic poly-sheeting. This isolates contaminants and prevents cross-contamination to unimpacted clean living areas.</p>
+                <p>Second, standing water extraction is performed using heavy-duty truck-mounted or portable extraction units. Extraction is up to 500 times more energy-efficient than thermal evaporation, making thorough physical liquid removal the most critical operational step.</p>
+                <p>Third, structural drying equipment is strategically deployed based on calculated cubic footage and specific moisture loads. Readings are logged daily using psychrometric charts to track specific humidity (grains per pound) until pre-loss conditions are verified.</p>
+                <p>Fourth, post-drying decontamination and structural stabilization ensure all structural elements are sanitized using EPA-registered botanical antimicrobial formulations, ensuring long-term indoor environmental safety.</p>
+
+                <div class="section-heading">Frequently Asked Questions</div>
+
+                <div class="faq-item">
+                    <div class="faq-title">How quickly should structural drying protocols begin following an incident?</div>
+                    <p>Structural drying should ideally initiate within 2 to 4 hours of the incident. Immediate action prevents secondary structural damage, structural warping, and microbial growth, which can commence within 24 to 48 hours under typical indoor temperatures.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-title">Can carpets and subflooring be saved after a significant fluid intrusion?</div>
+                    <p>Yes, provided the water source is clean (Category 1) and extraction protocols begin immediately. Utilizing sub-surface extraction tools and directional drying equipment allows technicians to dry carpet padding and subfloors in place without requiring destructive tear-out.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-title">How is structural dryness scientifically verified?</div>
+                    <p>Dryness is confirmed using calibrated moisture meters compared against unaffected dry standard baseline readings taken from similar materials in unimpacted areas of the property, ensuring complete structural equilibrium rather than superficial surface dryness.</p>
+                </div>
+
+                <div class="section-heading">Summary Conclusion</div>
+                <p>Navigating structural moisture emergencies requires technical knowledge, specialized industrial equipment, and precise scientific execution. Understanding psychrometric principles, rapid containment, and non-destructive inspection technologies empowers property owners to mitigate risks effectively, preserving architectural value and guaranteeing healthy interior spaces for the long term.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 5: Contact Page (No Business Details Revealed) -->
+    <section id="contact" class="page-section">
+        <span class="section-subtitle">Communication Portal</span>
+        <h1 class="hero-title" style="text-align: center;">Transmit Your Inquiry.</h1>
+        <p class="lead-text" style="text-align: center; margin: 0 auto 40px;">Complete the secure dispatch form below. Our emergency field response unit will process your message immediately.</p>
+
+        <div class="contact-form-container">
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="userName">Full Name</label>
+                    <input type="text" id="userName" class="form-control" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userEmail">Email Address</label>
+                    <input type="email" id="userEmail" class="form-control" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPhone">Phone Number</label>
+                    <input type="tel" id="userPhone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userMessage">Message / Incident Details</label>
+                    <textarea id="userMessage" class="form-control" placeholder="Describe your inquiry or structural requirement..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Transmit Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AquaShield Systems. Engineered Environmental Protection. All rights reserved.</p>
+    </footer>
+
+    <!-- Interactive Script for Motion & Navigation -->
+    <script>
+        function switchTab(tabId) {
+            // Update Nav Classes
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Find clicked nav item index based on tabId
+            const tabs = ['home', 'services', 'about', 'blog', 'contact'];
+            const activeIndex = tabs.indexOf(tabId);
+            if (activeIndex !== -1) {
+                navLinks[activeIndex].classList.add('active');
+            }
+
+            // Hide all sections with smooth fade
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(tabId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('.submit-btn');
+            const originalText = btn.innerText;
+            
+            btn.innerText = 'Transmitting Encrypted Data...';
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                alert('Thank you. Your operational inquiry has been successfully transmitted.');
+                event.target.reset();
+                btn.innerText = originalText;
+                btn.style.opacity = '1';
+            }, 1500);
+        }
+
+        // Scroll Animation Observer for Cards
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
